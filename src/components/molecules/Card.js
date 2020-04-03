@@ -29,6 +29,14 @@ const InnerWrapper = styled.div`
       justify-content: space-between;
     `}
 `;
+const DateInfo = styled(Paragraph)`
+  margin: 0 0 5px;
+  font-weight: ${({ theme }) => theme.bold};
+  font-size: ${({ theme }) => theme.fontSize.xs};
+`;
+const StyledHeading = styled(Heading)`
+  margin: 5px 0 0;
+`;
 
 const StyledAvatar = styled.img`
   width: 86px;
@@ -55,24 +63,19 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ cardType }) => {
+const Card = ({ cardType, title, created, twitterName, articleUrl, content }) => {
   return (
     <StyledWrapper>
       <InnerWrapper activeColor={cardType}>
-        <Heading>Hello Adrianna</Heading>
-
-        <Paragraph>3 days ago</Paragraph>
-        {cardType === 'twitter' && <StyledAvatar src="https://avatars.io/twitter/hello_roman" />}
-        {cardType === 'article' && (
-          <StyledLinkButton href="https://www.youtube.com/watch?v=U1eEkWZqoDQ" target="_blank" />
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
+        {cardType === 'twitter' && (
+          <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
         )}
+        {cardType === 'article' && <StyledLinkButton href={articleUrl} target="_blank" />}
       </InnerWrapper>
       <InnerWrapper flex>
-        <Paragraph>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est earum ea cupiditate atque.
-          In facilis quasi dolorum molestiae id, cumque ullam provident facere esse ipsum
-          voluptatum, nulla iure! Mollitia, a?
-        </Paragraph>
+        <Paragraph>{content}</Paragraph>
         <Button secondary>Remove</Button>
       </InnerWrapper>
     </StyledWrapper>
@@ -80,9 +83,16 @@ const Card = ({ cardType }) => {
 };
 Card.propTypes = {
   cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
+  content: PropTypes.string.isRequired,
 };
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleUrl: null,
 };
 
 export default Card;
