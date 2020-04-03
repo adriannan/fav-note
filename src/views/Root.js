@@ -8,7 +8,6 @@ import Articles from 'views/Articles';
 const Root = () => (
   <BrowserRouter>
     <MainTemplate>
-      <h1>Hello!</h1>
       <Switch>
         <Route exact path="/" component={Notes} />
         <Route path="/twitters" component={Twitters} />

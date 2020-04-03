@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ButtonIcon from 'components/atoms/ButtonIcon';
 import bulbIcon from 'assets/icons/bulb.svg';
@@ -14,7 +15,7 @@ const StyledWrapper = styled.nav`
   left: 0;
   background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.note)};
   padding: 25px 0;
-  width: 100px;
+  width: 150px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -60,6 +61,10 @@ const Sidebar = ({ pageType }) => {
       <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
     </StyledWrapper>
   );
+};
+
+Sidebar.propTypes = {
+  pageType: PropTypes.string.isRequired,
 };
 
 export default Sidebar;
