@@ -6,6 +6,7 @@ import Input from 'components/atoms/Input';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
 import ButtonIcon from 'components/atoms/ButtonIcon';
+import NewItemBar from 'components/organisms/NewItemBar';
 import PlusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
 
@@ -42,6 +43,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-color: ${({ theme, activeColor }) => theme[activeColor]};
   border-radius: 50px;
   background-size: 30%;
+  z-index: 10000;
 `;
 
 const GridTemplate = ({ children, pageContext }) => (
@@ -57,6 +59,7 @@ const GridTemplate = ({ children, pageContext }) => (
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
         <StyledButtonIcon icon={PlusIcon} activeColor={pageContext} />
+        <NewItemBar />
       </StyledWrapper>
     </UserPageTemplate>
   </>
