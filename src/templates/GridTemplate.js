@@ -77,7 +77,10 @@ class GridTemplate extends Component {
               activeColor={pageContext}
               onClick={this.handleNewItemBarVisible}
             />
-            <NewItemBar isVisible={isNewItemBarVisible} />
+            <NewItemBar
+              isVisible={isNewItemBarVisible}
+              toggleVisible={this.handleNewItemBarVisible}
+            />
           </StyledWrapper>
         </UserPageTemplate>
       </>
