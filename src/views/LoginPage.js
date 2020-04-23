@@ -43,7 +43,7 @@ const LoginPage = ({ authenticate, userID }) => (
     >
       {({ handleChange, handleBlur, values }) => {
         if (userID) {
-          return <Redirect to={routes.notes} />;
+          return <Redirect to={routes.home} />;
         }
         return (
           <>
