@@ -17,7 +17,7 @@ class Twitters extends Component {
     return (
       <GridTemplate>
         {twitters.map(({ title, content, twitterName, _id: id }) => (
-          <Card id={id} title={title} content={content} twitterName={twitterName} key={title} />
+          <Card id={id} title={title} content={content} twitterName={twitterName} key={id} />
         ))}
       </GridTemplate>
     );
