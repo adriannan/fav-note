@@ -56,8 +56,6 @@ export const removeItem = (itemType, id) => (dispatch) => {
 };
 
 export const addItem = (itemType, itemContent) => (dispatch, getState) => {
-  console.log(itemType);
-  console.log(itemContent);
   return axios
     .post('http://localhost:9000/api/note', {
       userID: getState().userID,
@@ -65,7 +63,6 @@ export const addItem = (itemType, itemContent) => (dispatch, getState) => {
       ...itemContent,
     })
     .then(({ data }) => {
-      console.log(data);
       dispatch({ type: ADD_ITEM_SUCCESS, payload: { data, itemType } });
     })
     .catch((err) => {
@@ -73,4 +70,3 @@ export const addItem = (itemType, itemContent) => (dispatch, getState) => {
       dispatch({ type: ADD_ITEM_FAILURE });
     });
 };
-// localhost:9000/api/note
