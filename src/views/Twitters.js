@@ -31,7 +31,6 @@ Twitters.propTypes = {
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       twitterName: PropTypes.string,
-      articleUrl: PropTypes.string,
     }),
   ),
 };

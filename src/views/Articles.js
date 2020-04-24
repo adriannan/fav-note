@@ -15,15 +15,8 @@ class Articles extends Component {
     const { articles } = this.props;
     return (
       <GridTemplate>
-        {articles.map(({ title, content, articleUrl, created, _id: id }) => (
-          <Card
-            id={id}
-            title={title}
-            content={content}
-            articleUrl={articleUrl}
-            created={created}
-            key={title}
-          />
+        {articles.map(({ title, content, articleUrl, _id: id }) => (
+          <Card id={id} title={title} content={content} articleUrl={articleUrl} key={title} />
         ))}
       </GridTemplate>
     );
@@ -32,10 +25,10 @@ class Articles extends Component {
 Articles.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
+      articleUrl: PropTypes.string,
     }),
   ),
 };

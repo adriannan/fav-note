@@ -16,8 +16,8 @@ class Notes extends Component {
 
     return (
       <GridTemplate>
-        {notes.map(({ title, content, created, _id: id }) => (
-          <Card id={id} title={title} content={content} created={created} key={id} />
+        {notes.map(({ title, content, _id: id }) => (
+          <Card id={id} title={title} content={content} key={id} />
         ))}
       </GridTemplate>
     );
@@ -27,10 +27,9 @@ class Notes extends Component {
 Notes.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
     }),
   ),
 };
