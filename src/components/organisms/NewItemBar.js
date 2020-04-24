@@ -43,7 +43,7 @@ const NewItemBar = ({ pageContext, isVisible, addItem, toggleVisible }) => {
     <StyledWrapper activeColor={pageContext} isVisible={isVisible}>
       <Heading big>Create new {pageContext} </Heading>
       <Formik
-        initialValues={{ title: '', content: '', accountName: '', link: '' }}
+        initialValues={{ title: '', content: '', twitterName: '', link: '' }}
         onSubmit={(values) => {
           addItem(pageContext, values);
           toggleVisible();
@@ -61,10 +61,10 @@ const NewItemBar = ({ pageContext, isVisible, addItem, toggleVisible }) => {
             {pageContext === 'twitters' && (
               <StyledInput
                 placeholder="account name"
-                name="accountName"
+                name="twitterName"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.accountName}
+                value={values.twitterName}
               />
             )}
             {pageContext === 'articles' && (
