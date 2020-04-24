@@ -33,13 +33,10 @@ const InnerWrapper = styled.div`
       justify-content: space-between;
     `}
 `;
-const DateInfo = styled(Paragraph)`
-  margin: 0 0 5px;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-`;
+
 const StyledHeading = styled(Heading)`
   margin: 5px 0 0;
+  cursor: pointer;
 `;
 
 const StyledAvatar = styled.img`
@@ -51,6 +48,7 @@ const StyledAvatar = styled.img`
   right: 25px;
   top: 25px;
   z-index: 999;
+  cursor: pointer;
 `;
 
 const StyledLinkButton = styled.a`
@@ -74,26 +72,16 @@ class Card extends Component {
   handleCardClick = () => this.setState({ redirect: true });
 
   render() {
-    const {
-      id,
-      title,
-      created,
-      twitterName,
-      articleUrl,
-      content,
-      removeItem,
-      pageContext,
-    } = this.props;
+    const { id, title, twitterName, articleUrl, content, removeItem, pageContext } = this.props;
 
     if (this.state.redirect) {
       return <Redirect to={`${pageContext}/${id}`} />;
     }
 
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={pageContext}>
+      <StyledWrapper>
+        <InnerWrapper activeColor={pageContext} onClick={this.handleCardClick} s>
           <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
           )}
@@ -114,7 +102,6 @@ Card.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,

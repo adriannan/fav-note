@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS';
+export const REMOVE_ITEM_FAILURE = 'REMOVE_ITEM_FAILURE';
+
 export const ADD_ITEM = 'ADD_ITEM';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
@@ -27,14 +29,11 @@ export const authenticate = (username, password) => (dispatch) => {
 };
 
 export const fetchItems = (itemType) => (dispatch, getState) => {
-  dispatch({ type: FETCH_REQUEST });
-
   return axios
     .get('http://localhost:9000/api/notes/type', {
       params: { type: itemType, userID: getState().userID },
     })
     .then(({ data }) => {
-      console.log(data);
       dispatch({ type: FETCH_SUCCESS, payload: { data, itemType } });
     })
     .catch((err) => {
@@ -43,7 +42,17 @@ export const fetchItems = (itemType) => (dispatch, getState) => {
     });
 };
 
-export const removeItem = (itemType, id) => ({ type: REMOVE_ITEM, payload: { itemType, id } });
+export const removeItem = (itemType, id) => (dispatch) => {
+  return axios
+    .delete(`http://localhost:9000/api/note/${id}`)
+    .then(() => {
+      dispatch({ type: REMOVE_ITEM_SUCCESS, payload: { itemType, id } });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: REMOVE_ITEM_FAILURE });
+    });
+};
 
 export const addItem = (itemType, itemContent) => {
   // const getId = () => `_${Math.random().toString(36).substr(2, 9)}`;

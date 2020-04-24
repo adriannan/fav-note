@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import DetailsTemplate from 'templates/DetailsTemplate';
-import { routes } from 'routes';
 import { connect } from 'react-redux';
 import withContext from 'hoc/withContext';
 import axios from 'axios';
