@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card';
+import { fetchItems } from 'actions';
 
-const Notes = ({ notes }) => {
-  return (
-    <GridTemplate>
-      {notes.map(({ title, content, created, id }) => (
-        <Card id={id} title={title} content={content} created={created} key={id} />
-      ))}
-    </GridTemplate>
-  );
-};
+class Notes extends Component {
+  componentDidMount() {
+    const { fetchNotes } = this.props;
+    fetchNotes();
+  }
+
+  render() {
+    const { notes } = this.props;
+
+    return (
+      <GridTemplate>
+        {notes.map(({ title, content, created, _id: id }) => (
+          <Card id={id} title={title} content={content} created={created} key={id} />
+        ))}
+      </GridTemplate>
+    );
+  }
+}
 
 Notes.propTypes = {
   notes: PropTypes.arrayOf(
@@ -30,5 +40,8 @@ Notes.defaultProps = {
 };
 
 const mapStateToProps = ({ notes }) => ({ notes });
+const mapDispatchToProps = (dispatch) => {
+  return { fetchNotes: () => dispatch(fetchItems('notes')) };
+};
 
-export default connect(mapStateToProps)(Notes);
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);
